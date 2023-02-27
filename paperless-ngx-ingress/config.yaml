@@ -1,0 +1,41 @@
+name: paperless-ngx-ingress
+panel_title: Paperless
+panel_icon: mdi:file-document-multiple-outline
+description: Embeds paperless-ngx with ingress in Home Assistant.
+version: "0.1.17"
+slug: paperless-ngx-ingress
+
+arch:
+  - amd64
+  - i386
+
+map:
+  - share:rw
+
+init: false
+
+ingress: true
+ingress_port: 666
+watchdog: http://[HOST]:[PORT:666]
+
+watchdog: 
+
+options:
+  admin:
+    username: null
+    password: null
+  consumptionDir: paperless
+  login: manual
+  hosts:
+    - host: http://homeassistant.local:8123
+schema:
+  admin:
+    username: str
+    password: str
+  consumptionDir: str
+  login: list(admin|auto|manual)
+  hosts:
+    - host: url
+
+hassio_api: true
+backup: cold

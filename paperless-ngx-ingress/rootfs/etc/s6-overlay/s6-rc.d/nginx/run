@@ -1,0 +1,7 @@
+#!/command/with-contenv bash
+
+echo "Starting nginx in addon ...";
+
+envsubst '$SUPERVISOR_TOKEN' < /etc/nginx/conf.d/ingress.template > /etc/nginx/conf.d/ingress.conf || exit 1;
+
+nginx -g 'daemon off;' 2>&1

@@ -1,0 +1,19 @@
+configuration:
+  admin:
+    name: Credentials for default superuser
+    description: These credentials will be used if at start there's no superuser configured.
+  consumptionDir:
+    name: Path to consumption directory
+    description: >
+      Path within the `share` directory to the consumnption directory. This path should be shared
+      using Samba or FTP or likewise so users can put documents here that will be consumed by paperless.
+  login:
+    name: Login mode for embedded UI.
+    description: >
+      For `admin` the embedded paperless instance will always be opened with the user as configured in `admin.username`. 
+      For `auto` the embedded paperless instance will always be opened with the user that is logged in to Home Assistant. This depends on [#4152](https://github.com/home-assistant/supervisor/pull/4152).
+      For `manual` the user must log in as usual even in embedded UI.
+  hosts:
+    name: List of allowed (external) hosts
+    description: >
+      List all external origins that may access paperless.

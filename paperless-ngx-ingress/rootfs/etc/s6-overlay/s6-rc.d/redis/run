@@ -1,0 +1,5 @@
+#!/command/with-contenv bash
+
+echo "Starting redis in addon ...";
+
+redis-server /etc/redis/redis.conf --daemonize no
