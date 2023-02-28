@@ -4,7 +4,7 @@ function config {
   yq "$@" /data/options.json
 }
 
-export HOSTS=http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ',')
+export HOSTS=http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
 
 export PAPERLESS_ADMIN_USER=$(config '.admin.username')
 export PAPERLESS_ADMIN_PASSWORD=$(config '.admin.password')
