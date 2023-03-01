@@ -4,7 +4,7 @@ function config {
   yq "$@" /data/options.json
 }
 
-export HOSTS=http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
+export HOSTS=http://localhost,http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
 
 export PAPERLESS_ADMIN_USER=$(config '.admin.username')
 export PAPERLESS_ADMIN_PASSWORD=$(config '.admin.password')
@@ -34,7 +34,8 @@ then
                                     > /etc/nginx/conf.d/ingress/headers.remote-user.conf || exit 1;
 fi
 
-export PAPERLESS_PORT=$(get-port paperless)
+export PAPERLESS_BIND_ADDR=127.0.0.1
+export PAPERLESS_PORT=8888
 envsubst '$PAPERLESS_PORT'  < /etc/nginx/conf.d/default/templates/location.conf \
                             > /etc/nginx/conf.d/default/location.conf || exit 1;
 

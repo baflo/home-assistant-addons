@@ -19,9 +19,9 @@ comparison to installing any other Home Assistant add-on.
 
 This addon is accessible from ingress and may also be configured to be accessed externally. It provides two access ports:
 
-- Port `666` is reserved to be used by Home Assistant's internal ingress. It makes use of the `REMOTE_USER` header to log in to paperless automatically, if accessed through the embedded UI.
+- Port `666` is reserved to be used by Home Assistant's internal ingress. It makes use of the `REMOTE_USER` header to log in to paperless automatically, if accessed through the embedded UI. **Do not expose this on the internet. Users could write their own `REMOTE_USER` header.**
 - Port `8000` can be used for external access, e.g. you can configure [cloudflared](https://github.com/brenner-tobias/addon-cloudflared/) to point to it. Don't forget to add your external host to the config. This entry removes the `REMOTE_USER` header so it cannot be used externally.
-- Internally, paperless runs on a random port that changes with every start. This is done so you cannot use it for external access by mistake.
+- Internally, paperless runs on port 8888, but it's bound to address 127.0.0.1, so you cannot access it from outside of the container.
 
 ## File Storage
 
