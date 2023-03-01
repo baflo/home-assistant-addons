@@ -19,7 +19,6 @@ RUN tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 ENTRYPOINT ["/init"]
 
 COPY rootfs /
-RUN chmod a+x /run.sh /usr/bin/get-port
 
 CMD ["/run.sh", "/usr/local/bin/paperless_cmd.sh"]
 EXPOSE 8000
