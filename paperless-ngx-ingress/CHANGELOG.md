@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.22
+
+Adds more configs to adjust paperless-ngx
+
 ## 0.1.21
 
 Makes run.sh executable again

@@ -4,12 +4,16 @@ function config {
   yq "$@" /data/options.json
 }
 
-export HOSTS=http://localhost,http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
+function strip-last-char {
+  cat | head -c -1
+}
+
+export HOSTS=http://localhost,http://homeassistant.local,$(config '.hosts[].host' | strip-last-char | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
 
 export PAPERLESS_ADMIN_USER=$(config '.admin.username')
 export PAPERLESS_ADMIN_PASSWORD=$(config '.admin.password')
 export PAPERLESS_FORCE_SCRIPT_NAME=$(curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" "http://supervisor/addons/${HOSTNAME/-/_}/info" | yq .data.ingress_entry)
-export PAPERLESS_CSRF_TRUSTED_ORIGINS=$(config '.hosts[].host' | head -c -1 | tr '\n' ',')
+export PAPERLESS_CSRF_TRUSTED_ORIGINS=$(config '.hosts[].host' | strip-last-char | tr '\n' ',')
 
 export PAPERLESS_ALLOWED_HOSTS=$(echo -n $HOSTS | sed -E 's/https?:\/\///g')
 export PAPERLESS_CSRF_TRUSTED_ORIGINS=$HOSTS
@@ -40,6 +44,13 @@ for target in default ingress; do
   envsubst '$PAPERLESS_PORT'  < "/etc/nginx/conf.d/$target/templates/location.conf" \
                               > "/etc/nginx/conf.d/$target/location.conf" || exit 1;
 done
+
+# OCR config
+export PAPERLESS_OCR_LANGUAGE=$(config '.ocr_langs[]' | strip-last-char | tr '\n' '+')
+export PAPERLESS_OCR_LANGUAGES=$(config '.ocr_langs[]' | strip-last-char | tr '\n' ' ')
+
+# Docker specific
+export PAPERLESS_WEBSERVER_WORKERS=$(config '.web_workers')
 
 # Reload nginx configuration
 nginx -s reload

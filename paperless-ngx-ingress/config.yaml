@@ -2,7 +2,7 @@ name: paperless-ngx-ingress
 panel_title: Paperless
 panel_icon: mdi:file-document-multiple-outline
 description: Embeds paperless-ngx with ingress in Home Assistant.
-version: "0.1.21"
+version: "0.1.22"
 slug: paperless-ngx-ingress
 
 arch:
@@ -26,6 +26,9 @@ options:
   login: manual
   hosts:
     - host: http://homeassistant.local:8123
+  ocr_langs:
+    - deu
+  web_workers: 1
 schema:
   admin:
     username: str
@@ -34,6 +37,9 @@ schema:
   login: list(admin|auto|manual)
   hosts:
     - host: url
+  ocr_langs:
+    - str
+  web_workers: int(1,)
 
 hassio_api: true
 backup: cold
