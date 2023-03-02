@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.21
+
+Makes run.sh executable again
+
 ## 0.1.20
 
 Proxy always overrides host header for requests coming from home assistant ingress
