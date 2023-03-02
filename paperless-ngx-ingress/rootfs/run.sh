@@ -8,12 +8,12 @@ function strip-last-char {
   cat | head -c -1
 }
 
-export HOSTS=http://localhost,http://homeassistant.local,$(config '.hosts[].host' | head -c -1 | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
+export HOSTS=http://localhost,http://homeassistant.local,$(config '.hosts[].host' | strip-last-char | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')
 
 export PAPERLESS_ADMIN_USER=$(config '.admin.username')
 export PAPERLESS_ADMIN_PASSWORD=$(config '.admin.password')
 export PAPERLESS_FORCE_SCRIPT_NAME=$(curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" "http://supervisor/addons/${HOSTNAME/-/_}/info" | yq .data.ingress_entry)
-export PAPERLESS_CSRF_TRUSTED_ORIGINS=$(config '.hosts[].host' | head -c -1 | tr '\n' ',')
+export PAPERLESS_CSRF_TRUSTED_ORIGINS=$(config '.hosts[].host' | strip-last-char | tr '\n' ',')
 
 export PAPERLESS_ALLOWED_HOSTS=$(echo -n $HOSTS | sed -E 's/https?:\/\///g')
 export PAPERLESS_CSRF_TRUSTED_ORIGINS=$HOSTS
