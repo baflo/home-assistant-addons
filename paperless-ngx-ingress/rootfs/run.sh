@@ -36,8 +36,10 @@ fi
 
 export PAPERLESS_BIND_ADDR=127.0.0.1
 export PAPERLESS_PORT=8888
-envsubst '$PAPERLESS_PORT'  < /etc/nginx/conf.d/default/templates/location.conf \
-                            > /etc/nginx/conf.d/default/location.conf || exit 1;
+for target in default ingress; do
+  envsubst '$PAPERLESS_PORT'  < "/etc/nginx/conf.d/$target/templates/location.conf" \
+                              > "/etc/nginx/conf.d/$target/location.conf" || exit 1;
+done
 
 # Reload nginx configuration
 nginx -s reload
