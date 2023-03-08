@@ -1,4 +1,4 @@
-# Paperless-ng Home Assistant Addon
+# Paperless-ngx Home Assistant Addon
 
 ## About
 
