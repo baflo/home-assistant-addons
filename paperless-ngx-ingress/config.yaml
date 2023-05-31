@@ -2,7 +2,7 @@ name: paperless-ngx-ingress
 panel_title: Paperless
 panel_icon: mdi:file-document-multiple-outline
 description: Embeds paperless-ngx with ingress in Home Assistant.
-version: "0.1.22"
+version: "0.2.0"
 slug: paperless-ngx-ingress
 
 arch:
@@ -22,7 +22,10 @@ options:
   admin:
     username: null
     password: null
-  consumptionDir: paperless
+  consumption: 
+    dir: paperless
+    recursively: false
+    subdirsAsTags: false
   login: manual
   hosts:
     - host: http://homeassistant.local:8123
@@ -33,7 +36,10 @@ schema:
   admin:
     username: str
     password: str
-  consumptionDir: str
+  consumption:
+    dir: str
+    recursively: bool
+    subdirsAsTags: bool
   login: list(admin|auto|manual)
   hosts:
     - host: url

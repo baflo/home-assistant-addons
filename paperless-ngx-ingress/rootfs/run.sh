@@ -15,12 +15,15 @@ export PAPERLESS_ADMIN_PASSWORD=$(config '.admin.password')
 export PAPERLESS_FORCE_SCRIPT_NAME=$(curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" "http://supervisor/addons/${HOSTNAME/-/_}/info" | yq .data.ingress_entry)
 export PAPERLESS_CSRF_TRUSTED_ORIGINS=$(config '.hosts[].host' | strip-last-char | tr '\n' ',')
 
+export PAPERLESS_CONSUMER_RECURSIVE=$(config '.consumption.recursively')
+export PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS=$(config '.consumption.subdirsAsTags')
+
 export PAPERLESS_ALLOWED_HOSTS=$(echo -n $HOSTS | sed -E 's/https?:\/\///g')
 export PAPERLESS_CSRF_TRUSTED_ORIGINS=$HOSTS
 export PAPERLESS_CORS_ALLOWED_HOSTS=$HOSTS
 
 # Ensure directories
-CONSUMPTION_DIR="/share/$(config '.consumptionDir')"
+CONSUMPTION_DIR="/share/$(config '.consumption.dir')"
 mkdir -p "$CONSUMPTION_DIR"
 
 DATA_DIRECTORY=/data/paperless

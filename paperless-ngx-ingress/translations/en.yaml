@@ -2,8 +2,8 @@ configuration:
   admin:
     name: Credentials for default superuser
     description: These credentials will be used if at start there's no superuser configured.
-  consumptionDir:
-    name: Path to consumption directory
+  consumption:
+    name: Configurations for consumption
     description: >
       Path within the `share` directory to the consumnption directory. This path should be shared
       using Samba or FTP or likewise so users can put documents here that will be consumed by paperless.

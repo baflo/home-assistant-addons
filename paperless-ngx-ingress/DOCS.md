@@ -41,7 +41,10 @@ The simplest way to make a backup is to make a Home Assistant backup and include
 admin:
   username: superuser
   password: superpassword
-consumptionDir: paperless
+consumption:
+  dir: paperless
+  recursively: false
+  subdirsAsTags: false
 login: admin
 hosts:
   - host: http://homeassistant.local:8123
@@ -51,7 +54,7 @@ hosts:
 
 The default superuser that will be created after startup if no superuser has been created, yet.
 
-### Option: `consumptionDir`
+### Option: `consumption.dir`
 
 The path to the `consumption` directory within the `share` directory.
 
