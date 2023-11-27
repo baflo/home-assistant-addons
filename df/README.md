@@ -22,7 +22,7 @@ In Home Assistant `configuration.yaml`, you must configure sensors to request th
 
 ```
 rest:
-  - resource: "http://local-df:1234/backup"
+  - resource: "http://d5097817-df:1234/backup"
     sensor:
       - name: "Backup Disk Usage"
         value_template: "{{ value_json.used }}"
@@ -38,7 +38,7 @@ rest:
         value_template: "{{ value_json.percent }}"
         unit_of_measurement: "%"
         unique_id: backup_disk_percent
-  - resource: "http://local-df:1234/config"
+  - resource: "http://d5097817-df:1234/config"
     sensor:
       - name: "Config Disk Usage"
         value_template: "{{ value_json.used }}"
@@ -54,7 +54,7 @@ rest:
         value_template: "{{ value_json.percent }}"
         unit_of_measurement: "%"
         unique_id: config_disk_percent
-  - resource: "http://local-df:1234/media/MEDIA"
+  - resource: "http://d5097817-df:1234/media/MEDIA"
     sensor:
       - name: "Media Disk Usage"
         value_template: "{{ value_json.used }}"
