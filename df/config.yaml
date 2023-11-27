@@ -1,5 +1,5 @@
 name: "df"
-version: "0.0.0-0"
+version: "0.0.1"
 slug: "df"
 description: "Provides a service which returns the data usage of any folder."
 arch:
