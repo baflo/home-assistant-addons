@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.23
+## 0.2.1
 
 Allows non-admin users to use paperless.
 
