@@ -18,6 +18,8 @@ ingress: true
 ingress_port: 666
 watchdog: http://[HOST]:[PORT:666]
 
+panel_admin: false
+
 options:
   admin:
     username: null

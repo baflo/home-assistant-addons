@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.23
+
+Allows non-admin users to use paperless.
+
 ## 0.1.22
 
 Adds more configs to adjust paperless-ngx
