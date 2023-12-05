@@ -40,6 +40,7 @@ then
   envsubst '$PAPERLESS_ADMIN_USER'  < /etc/nginx/conf.d/ingress/templates/headers.remote-user-admin.conf \
                                     > /etc/nginx/conf.d/ingress/headers.remote-user.conf || exit 1;
 elif [ $(config '.login') = "auto" ]
+then
   export PAPERLESS_ENABLE_HTTP_REMOTE_USER=true
   cp /etc/nginx/conf.d/ingress/templates/headers.remote-user-from-ingress.conf \
                                       /etc/nginx/conf.d/ingress/headers.remote-user.conf;
