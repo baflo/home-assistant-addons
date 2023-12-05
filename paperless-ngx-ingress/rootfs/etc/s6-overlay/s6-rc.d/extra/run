@@ -1,5 +1,7 @@
 #!/command/with-contenv bash
 
+. /env.sh
+
 echo "Starting paperless-extra in addon ...";
 
 cd /usr/src/paperless_extra
