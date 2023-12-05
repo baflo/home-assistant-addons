@@ -1,0 +1,8 @@
+#!/command/with-contenv bash
+
+echo "Starting paperless-extra in addon ...";
+
+cd /usr/src/paperless-extra
+
+python manage.py runserver 8001 &
+
