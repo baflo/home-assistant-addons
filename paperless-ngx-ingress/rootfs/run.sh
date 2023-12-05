@@ -37,8 +37,12 @@ export PAPERLESS_MEDIA_ROOT=$DATA_DIRECTORY
 if [ $(config '.login') = "admin" ]
 then
   export PAPERLESS_ENABLE_HTTP_REMOTE_USER=true
-  envsubst '$PAPERLESS_ADMIN_USER'  < /etc/nginx/conf.d/ingress/templates/headers.remote-user.conf \
+  envsubst '$PAPERLESS_ADMIN_USER'  < /etc/nginx/conf.d/ingress/templates/headers.remote-user-admin.conf \
                                     > /etc/nginx/conf.d/ingress/headers.remote-user.conf || exit 1;
+elif [ $(config '.login') = "auto" ]
+  export PAPERLESS_ENABLE_HTTP_REMOTE_USER=true
+  cp /etc/nginx/conf.d/ingress/templates/headers.remote-user-from-ingress.conf \
+                                      /etc/nginx/conf.d/ingress/headers.remote-user.conf;
 fi
 
 export PAPERLESS_BIND_ADDR=127.0.0.1

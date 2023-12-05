@@ -64,7 +64,7 @@ May be `admin`, `auto` or `manual` and regards the login to the paperless embedd
 
 For `admin` the embedded paperless instance will always be opened with the user as configured in `admin.username`. 
 
-For `auto` the embedded paperless instance will always be opened with the user that is logged in to Home Assistant. This depends on [#4152](https://github.com/home-assistant/supervisor/pull/4152).
+For `auto` the embedded paperless instance will always be opened with the user that is logged in to Home Assistant.
 
 For `manual` the user must log in as usual even in embedded UI.
 

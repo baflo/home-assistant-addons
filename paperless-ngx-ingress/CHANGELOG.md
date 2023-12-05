@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+Adapats auto login feature to final solution in [#4152](https://github.com/home-assistant/supervisor/pull/4152).
+
 ## 0.2.1
 
 Allows non-admin users to use paperless.
