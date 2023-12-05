@@ -2,7 +2,7 @@ name: paperless-ngx-ingress
 panel_title: Paperless
 panel_icon: mdi:file-document-multiple-outline
 description: Embeds paperless-ngx with ingress in Home Assistant.
-version: "0.2.3-7"
+version: "0.2.3-8"
 slug: paperless-ngx-ingress
 
 arch:
@@ -17,13 +17,6 @@ init: false
 ingress: true
 ingress_port: 666
 watchdog: http://[HOST]:[PORT:666]
-
-
-ports:
-  8001/tcp: null
-  
-ports_description:
-  8001/tcp: paperless-extra
 
 panel_admin: false
 
