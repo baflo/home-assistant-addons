@@ -12,7 +12,7 @@ class InboxCountView(View):
 
         # Rufe die Umgebungsvariablen für die Basic Authentication ab
         admin_user = os.environ.get('PAPERLESS_ADMIN_USER')
-        admin_pass = os.environ.get('PAPERLESS_ADMIN_PASS')
+        admin_pass = os.environ.get('PAPERLESS_ADMIN_PASSWORD')
 
         # Rufe den Service http://localhost:8000/api/users auf mit Basic Authentication
         users_url = 'http://localhost:8000/api/users/'
