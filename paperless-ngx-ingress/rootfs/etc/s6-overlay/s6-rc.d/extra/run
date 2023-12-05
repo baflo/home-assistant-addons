@@ -1,11 +1,9 @@
 #!/command/with-contenv bash
 
-. /env.sh
-
 echo "Starting paperless-extra in addon ...";
 
 cd /usr/src/paperless_extra
 
 pip install -r requirements.txt
-python manage.py runserver 8001 &
+env $(cat /env.sh) python manage.py runserver 8001 &
 
