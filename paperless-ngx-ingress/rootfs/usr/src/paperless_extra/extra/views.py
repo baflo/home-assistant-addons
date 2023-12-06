@@ -25,7 +25,7 @@ class CountByTagView(View):
         tags_url = 'http://localhost:8000/api/tags/'
         response_tags = requests.get(tags_url, auth=auth)
         tags_data = response_tags.json()
-        inbox_tags = ",".join([str(tag.id) for tag in tags_data.results if tagPredicateLambda(tag)])
+        inbox_tags = ",".join([str(tag.get("id")) for tag in tags_data.get("results") if tagPredicateLambda(tag)])
 
         # Suche die userid für den angegebenen username
         userid = None
@@ -51,10 +51,10 @@ class CountByTagView(View):
 class InboxCountView(CountByTagView):
     def get(self, *args, **kwargs):
         
-        return getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.is_inbox_tab)
+        return getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.get("is_inbox_tab"))
 
 
 class TaskCountView(CountByTagView):
     def get(self, *args, **kwargs):
         
-        return getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.slug == "task")
+        return getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.get("slug") == "task")
