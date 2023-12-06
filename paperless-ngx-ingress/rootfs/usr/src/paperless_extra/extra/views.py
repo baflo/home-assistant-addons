@@ -36,7 +36,7 @@ class CountByTagView(View):
 
         # Rufe den Service http://localhost:8000/api/documents/?owner__id=userid auf mit Basic Authentication
         if userid is None:
-            documents-url = f'http://localhost:8000/api/documents/?owner__id__none&tags__id__in={inbox_tags}'
+            documents_url = f'http://localhost:8000/api/documents/?owner__id__none&tags__id__in={inbox_tags}'
         else:
             documents_url = f'http://localhost:8000/api/documents/?owner__id={userid}&tags__id__in={inbox_tags}'
 
