@@ -1,9 +1,11 @@
 # paperless_app/urls.py
 from django.urls import path
-from .views import InboxCountView
+from .views import InboxCountView, TaskCountView
 
 urlpatterns = [
-    path('inbox-count/', InboxCountView.as_view()),
-    path('inbox-count/<str:username>', InboxCountView.as_view()),
+    path('inbox/', InboxCountView.as_view()),
+    path('inbox/<str:username>', InboxCountView.as_view()),
+    path('task/', TaskCountView.as_view()),
+    path('task/<str:username>', TaskCountView.as_view()),
 ]
 
