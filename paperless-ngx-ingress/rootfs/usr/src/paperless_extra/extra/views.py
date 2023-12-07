@@ -54,7 +54,7 @@ class InboxCountView(CountByTagView):
         return self.getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.get("is_inbox_tag"))
 
 
-class TaskCountView(CountByTagView):
+class TodoCountView(CountByTagView):
     def get(self, *args, **kwargs):
         
-        return self.getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.get("slug") == "task")
+        return self.getByPredicate(*args, **kwargs, tagPredicateLambda=lambda tag: tag.get("slug") == "todo")
