@@ -7,7 +7,7 @@ server {
 
     proxy_buffering off;
 
-    location /api/ingress {
+    location /api/hassio_ingress {
         rewrite ^(?:/api/ingress/[^/]+)?(.*) $1 last;
     }
 
