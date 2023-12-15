@@ -8,6 +8,7 @@ server {
     proxy_buffering off;
 
     location / {
+        rewrite ^(?:/api/ingress/[^/]+)?(.*) $1 last;
         include /etc/nginx/conf.d/ingress/*.conf;
     }
 }
