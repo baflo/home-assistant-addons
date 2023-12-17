@@ -16,6 +16,7 @@ webui: "http://[HOST]:[PORT:9981]/"
 devices:
   - /dev/dvb
   - /dev/dri
+host_network: true
 ports:
   9981/tcp: 9981
   9982/tcp: 9982
