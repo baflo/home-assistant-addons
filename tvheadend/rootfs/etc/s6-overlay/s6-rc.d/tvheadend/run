@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: TVHeadend
+# Starts TVHeadend
+# ==============================================================================
+
+bashio::log.info "Starting TVHeadend..."
+
+exec /usr/bin/tvheadend -u root -g root -c /config/tvheadend $(bashio::config 'command_line_args')
