@@ -7,10 +7,6 @@ server {
 
     proxy_buffering off;
 
-    location /api/hassio_ingress {
-        rewrite ^(?:/api/ingress/[^/]+)?(.*) $1 last;
-    }
-
     location / {
         include /etc/nginx/conf.d/ingress/*.conf;
     }
