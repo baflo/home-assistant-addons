@@ -5,10 +5,16 @@ ARG BUILD_FROM
 ############## build stage ##############
 FROM ghcr.io/linuxserver/baseimage-alpine:3.18 as buildstage
 
+# package versions
+ARG ARGTABLE_VER="2.13"
+
 # environment settings
 ARG TZ="Etc/UTC"
 ARG TVHEADEND_COMMIT
 ENV HOME="/config/tvheadend"
+
+# copy patches
+COPY patches/ /tmp/patches/
 
 RUN \
   echo "**** install build packages ****" && \
@@ -99,6 +105,38 @@ RUN \
   make -j 2 && \
   make DESTDIR=/tmp/tvheadend-build install
 
+RUN \
+  echo "**** compile argtable2 ****" && \
+  ARGTABLE_VER1="${ARGTABLE_VER//./-}" && \
+  mkdir -p \
+    /tmp/argtable && \
+  curl -s -o \
+  /tmp/argtable-src.tar.gz -L \
+    "https://sourceforge.net/projects/argtable/files/argtable/argtable-${ARGTABLE_VER}/argtable${ARGTABLE_VER1}.tar.gz" && \
+  tar xf \
+  /tmp/argtable-src.tar.gz -C \
+    /tmp/argtable --strip-components=1 && \
+  cp /tmp/patches/config.* /tmp/argtable && \
+  cd /tmp/argtable && \
+  ./configure \
+    --prefix=/usr && \
+  make -j 2 && \
+  make check && \
+  make DESTDIR=/tmp/argtable-build install && \
+  echo "**** copy to /usr for comskip dependency ****" && \
+  cp -pr /tmp/argtable-build/usr/* /usr/
+
+RUN \
+  echo "***** compile comskip ****" && \
+  git clone https://github.com/erikkaashoek/Comskip /tmp/comskip && \
+  cd /tmp/comskip && \
+  ./autogen.sh && \
+  ./configure \
+    --bindir=/usr/bin \
+    --sysconfdir=/config/comskip && \
+  make -j 2 && \
+  make DESTDIR=/tmp/comskip-build install
+
 
 ############## runtime stage ##############
 FROM ${BUILD_FROM}
@@ -148,6 +186,8 @@ RUN \
     zlib
 
 # copy local files and buildstage artifacts
+COPY --from=buildstage /tmp/argtable-build/usr/ /usr/
+COPY --from=buildstage /tmp/comskip-build/usr/ /usr/
 COPY --from=buildstage /tmp/tvheadend-build/usr/ /usr/
 
 COPY requirements.txt /tmp/
