@@ -1,6 +1,6 @@
 ---
 name: TVHeadend
-version: dev-1
+version: dev-2
 stage: experimental
 slug: tvheadend
 description: TV streaming server and recorder.
