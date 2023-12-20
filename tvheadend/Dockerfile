@@ -109,9 +109,6 @@ ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="saarg"
 
-# environment settings
-# ENV HOME="/config/tvheadend"
-
 RUN \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
@@ -157,12 +154,22 @@ COPY requirements.txt /tmp/
 
 RUN \
     apk update \
+    && apk add --no-cache --virtual .build-deps \
+        musl-dev \
+        gcc \
+        g++ \
+        libxml2-dev \
+        libxslt-dev \
+        python3-dev \
     && apk add --no-cache \
+        tvheadend \
         py3-pip \
+        libxslt \
     && pip3 install \
         --no-cache-dir \
         --prefer-binary \
         -r /tmp/requirements.txt \
+    && apk del --no-cache --purge .build-deps
 
 # Copy root filesystem
 COPY rootfs /
