@@ -110,7 +110,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 LABEL maintainer="saarg"
 
 # environment settings
-ENV HOME="/config/tvheadend"
+# ENV HOME="/config/tvheadend"
 
 RUN \
   echo "**** install runtime packages ****" && \
