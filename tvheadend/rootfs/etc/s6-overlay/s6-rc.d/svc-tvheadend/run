@@ -3,4 +3,4 @@
 
 exec \
     s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost 9981" \
-        s6-setuidgid abc /usr/bin/tvheadend -C -c /config $RUN_OPTS $(bashio::config 'command_line_args')
+        s6-setuidgid abc /usr/bin/tvheadend -C -c /data $RUN_OPTS $(bashio::config 'command_line_args')

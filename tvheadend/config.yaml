@@ -1,6 +1,6 @@
 ---
 name: TVHeadend
-version: dev-4
+version: dev-7
 stage: experimental
 slug: tvheadend
 description: TV streaming server and recorder.
@@ -27,12 +27,6 @@ map:
   - "config:rw"
   - "media:rw"
 options:
-  system_packages: []
-  init_commands: []
   command_line_args: ""
 schema:
-  system_packages:
-    - str
-  init_commands:
-    - str
   command_line_args: str
