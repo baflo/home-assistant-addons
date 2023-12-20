@@ -163,7 +163,6 @@ RUN \
         --no-cache-dir \
         --prefer-binary \
         -r /tmp/requirements.txt \
-    && apk del --no-cache --purge .build-deps
 
 # Copy root filesystem
 COPY rootfs /
