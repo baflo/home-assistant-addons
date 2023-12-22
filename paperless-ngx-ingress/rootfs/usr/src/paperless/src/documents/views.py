@@ -34,6 +34,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import get_language
 from django.views import View
 from django.views.decorators.cache import cache_control
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import TemplateView
 from django_filters.rest_framework import DjangoFilterBackend
 from langdetect import detect
@@ -122,7 +123,7 @@ if settings.AUDIT_LOG_ENABLED:
 
 logger = logging.getLogger("paperless.api")
 
-
+@csrf_protect
 class IndexView(TemplateView):
     template_name = "index.html"
 
