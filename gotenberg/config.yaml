@@ -1,0 +1,11 @@
+name: Gotenberg
+description: Gotenberg is a Docker-powered stateless API for PDF files.
+version: "0.0.1"
+slug: gotenberg
+
+arch:
+  - amd64
+  - i386
+
+init: false
+
