@@ -22,6 +22,10 @@ export PAPERLESS_ALLOWED_HOSTS=$(echo -n $HOSTS | sed -E 's/https?:\/\///g')
 export PAPERLESS_CSRF_TRUSTED_ORIGINS=$HOSTS
 export PAPERLESS_CORS_ALLOWED_HOSTS=$HOSTS
 
+export PAPERLESS_TIKA_ENABLED=$(config '.tika_enabled')
+export PAPERLESS_TIKA_ENDPOINT=$(config '.tika_endpoint')
+export PAPERLESS_TIKA_GOTENBERG_ENDPOINT=$(config '.tika_gotenberg_endpoint')
+
 # Ensure directories
 CONSUMPTION_DIR="/share/$(config '.consumption.dir')"
 mkdir -p "$CONSUMPTION_DIR"
