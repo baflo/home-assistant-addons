@@ -17,14 +17,14 @@ configuration:
     name: List of allowed (external) hosts
     description: >
       List all external origins that may access paperless.
+  ignore_dates:
+    name: "Ignore dates (Format: DDMMYYYY)"
+    description: >
+      You may specify a list of dates that should be ignored during this process. This is useful for special dates (like date of birth) that appear in documents regularly but are very unlikely to be the documents creation date.
   ocr_langs:
     name: OCR languages to be used
     description: >
       List of all languages that should be used for OCR. See [docs](https://docs.paperless-ngx.com/configuration/#PAPERLESS_OCR_LANGUAGE) for more information.
-  web_workers:
-    name: Number of webserver workers
-    description: >
-      More worker processes usually result in the front end to load data much quicker. However, each worker process also loads the entire application into memory separately, so increasing this value will increase RAM usage.
   tika_enabled:
     name: Enable Apache Tika
     description: >
@@ -37,4 +37,8 @@ configuration:
     name: Gotenberg Endpoint URI
     description: >
       Enter URI to your Gotenberg instance. You can use the [addon from this repository](../gotenberg/README.md).
+  web_workers:
+    name: Number of webserver workers
+    description: >
+      More worker processes usually result in the front end to load data much quicker. However, each worker process also loads the entire application into memory separately, so increasing this value will increase RAM usage.
   

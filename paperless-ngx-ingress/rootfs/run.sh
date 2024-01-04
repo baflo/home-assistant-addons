@@ -57,6 +57,9 @@ for target in default ingress; do
                               > "/etc/nginx/conf.d/$target/location.conf" || exit 1;
 done
 
+# Ignore dates
+export PAPERLESS_IGNORE_DATES=$(config '.ignore_dates[]' | strip-last-char | tr '\n' ',')
+
 # OCR config
 export PAPERLESS_OCR_LANGUAGE=$(config '.ocr_langs[]' | strip-last-char | tr '\n' '+')
 export PAPERLESS_OCR_LANGUAGES=$(config '.ocr_langs[]' | strip-last-char | tr '\n' ' ')

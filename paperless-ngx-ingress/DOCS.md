@@ -95,6 +95,12 @@ For `manual` the user must log in as usual even in embedded UI.
 
 List of allowed external hosts.
 
+### Option: `ignore_dates`
+
+Format: `DDMMYYYY`
+
+You may specify a list of dates that should be ignored during this process. This is useful for special dates (like date of birth) that appear in documents regularly but are very unlikely to be the documents creation date.
+
 ### Option: `tika_enabled`
 
 Set to `true`, if you want to use [Tika/Gotenberg to archive Mails, Microsoft documents and many more](https://docs.paperless-ngx.com/configuration/#tika).

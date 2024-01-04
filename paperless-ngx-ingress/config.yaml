@@ -20,6 +20,26 @@ watchdog: http://[HOST]:[PORT:666]
 
 panel_admin: false
 
+schema:
+  admin:
+    username: str
+    password: str
+  consumption:
+    dir: str
+    recursively: bool
+    subdirsAsTags: bool
+  ignore_dates:
+    - match(\d{8})
+  login: list(admin|auto|manual)
+  hosts:
+    - host: url
+  ocr_langs:
+    - str
+  tika_enabled: bool
+  tika_endpoint: str?
+  tika_gotenberg_endpoint: str?
+  web_workers: int(1,)
+
 options:
   admin:
     username: null
@@ -33,24 +53,8 @@ options:
     - host: http://homeassistant.local:8123
   ocr_langs:
     - deu
-  web_workers: 1
   tika_enabled: false
-schema:
-  admin:
-    username: str
-    password: str
-  consumption:
-    dir: str
-    recursively: bool
-    subdirsAsTags: bool
-  login: list(admin|auto|manual)
-  hosts:
-    - host: url
-  ocr_langs:
-    - str
-  web_workers: int(1,)
-  tika_enabled: bool
-  tika_endpoint: str?
-  tika_gotenberg_endpoint: str?
+  web_workers: 1
+
 hassio_api: true
 backup: cold

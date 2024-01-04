@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+Adds more simple configs.
+
 ## 0.3.0
 
 Allows usage of tika/gotenberg to archive e-mails and Microsoft documents.
