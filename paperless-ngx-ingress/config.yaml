@@ -48,6 +48,7 @@ options:
     dir: paperless
     recursively: false
     subdirsAsTags: false
+  ignore_dates: []
   login: manual
   hosts:
     - host: http://homeassistant.local:8123
