@@ -29,7 +29,7 @@ schema:
     recursively: bool
     subdirsAsTags: bool
   ignore_dates:
-    - match(\d{8})
+    - match(\d{8})?
   login: list(admin|auto|manual)
   hosts:
     - host: url
@@ -48,7 +48,6 @@ options:
     dir: paperless
     recursively: false
     subdirsAsTags: false
-  ignore_dates: []
   login: manual
   hosts:
     - host: http://homeassistant.local:8123
