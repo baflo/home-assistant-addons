@@ -23,15 +23,38 @@ This addon is accessible from ingress and may also be configured to be accessed 
 - Port `8000` can be used for external access, e.g. you can configure [cloudflared](https://github.com/brenner-tobias/addon-cloudflared/) to point to it. Don't forget to add your external host to the config. This entry removes the `REMOTE_USER` header so it cannot be used externally.
 - Internally, paperless runs on port 8888, but it's bound to address 127.0.0.1, so you cannot access it from outside of the container.
 
-## File Storage
+
+### Metrics API
+
+Additionally, a second API is provided to easily access metrics from Home Assistant. This API is accessible on port 8001 and provides folling APIs:
+
+- `inbox/`, `inbox/<str:username>`
+  - the number of _inbox_ documents from the user in question. If none is given, the username will be extracted from the request header [`X-Remote-User-Name`](https://developers.home-assistant.io/docs/add-ons/security#authenticating-a-user-when-using-ingress).
+- `todo/`, `todo/<str:username>`
+  - the number of _todo_ documents from the user in question. If none is given, the username will be extracted from the request header [`X-Remote-User-Name`](https://developers.home-assistant.io/docs/add-ons/security#authenticating-a-user-when-using-ingress).
+
+#### Example Rest sensor configuration 
+
+```
+rest:
+  - resource: http://d5097817-paperless-ngx-ingress:8001/count/inbox/john
+    scan_interval: 600
+    sensor:
+      - name: Paperless Documents in Johns Inbox
+        unique_id: paperless_inbox_count_john
+        value_template: "{{ value_json.count }}"
+```
+
+
+## File and database storage
 
 The *consumption directory* is located in `share/paperless` and should be published so files can be placed there.
 
-The `data` and `media` directories are located in the addon's private `data` directory.
+The database is using the `sqlite3` mode and its files are stored in the default `data` directory. The `data` and `media` directories are located in the addon's private `data` directory.
 
 ## Backing up
 
-The simplest way to make a backup is to make a Home Assistant backup and include the addon's data.
+The simplest way to make a backup is to make a Home Assistant backup and include the addon's data. This addon is configured to to `cold` backup, hence shutting down before Home Assistant will to the backup.
 
 ## Configuration
 
@@ -72,7 +95,15 @@ For `manual` the user must log in as usual even in embedded UI.
 
 List of allowed external hosts.
 
+### Option: `tika_enabled`
 
+Set to `true`, if you want to use [Tika/Gotenberg to archive Mails, Microsoft documents and many more](https://docs.paperless-ngx.com/configuration/#tika).
 
+### Option: `tika_endpoint`
 
+Set to URI of your Tika instance, e.g. `http://d5097817-apache-tika:9998` if you're using the [Tika addon from this repository](../tika/README.md).
+
+### Option: `tika_gotenberg_endpoint`
+
+Set to URI of your Gotenberg instance, e.g. `http://d5097817-gotenberg:3000` if you're using the [Gotenberg addon from this repository](../tika/README.md).
 

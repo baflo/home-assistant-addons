@@ -17,3 +17,20 @@ configuration:
     name: List of allowed (external) hosts
     description: >
       List all external origins that may access paperless.
+  ocr_langs:
+    name: OCR languages to be used
+    description: >
+      List of all languages that should be used for OCR. See [docs](https://docs.paperless-ngx.com/configuration/#PAPERLESS_OCR_LANGUAGE) for more information.
+  tika_enabled:
+    name: Enable Apache Tika
+    description: >
+      If you want to archive e-mails and/or Microsoft documents or many other things, make sure you have a Tika and an Gotenberg instance each and enable this option.
+  tika_endpoint:
+    name: Tika Endpoint URI
+    description: >
+      Enter URI to your Tika instance. You can use the [addon from this repository](../tika/README.md).
+  tika_gotenberg_endpoint:
+    name: Gotenberg Endpoint URI
+    description: >
+      Enter URI to your Gotenberg instance. You can use the [addon from this repository](../gotenberg/README.md).
+  
