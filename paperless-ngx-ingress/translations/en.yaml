@@ -21,6 +21,10 @@ configuration:
     name: OCR languages to be used
     description: >
       List of all languages that should be used for OCR. See [docs](https://docs.paperless-ngx.com/configuration/#PAPERLESS_OCR_LANGUAGE) for more information.
+  web_workers:
+    name: Number of webserver workers
+    description: >
+      More worker processes usually result in the front end to load data much quicker. However, each worker process also loads the entire application into memory separately, so increasing this value will increase RAM usage.
   tika_enabled:
     name: Enable Apache Tika
     description: >
