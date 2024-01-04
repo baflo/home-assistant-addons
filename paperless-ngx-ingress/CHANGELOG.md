@@ -1,8 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+Allows usage of tika/gotenberg to archive e-mails and Microsoft documents.
+
 ## 0.2.2
 
-Adapats auto login feature to final solution in [#4152](https://github.com/home-assistant/supervisor/pull/4152).
+Adapts auto login feature to final solution in [#4152](https://github.com/home-assistant/supervisor/pull/4152).
 
 ## 0.2.1
 
