@@ -1,0 +1,22 @@
+name: rmfakecloud
+version: 0.0.1-dev1
+slug: rmfakecloud
+description: "rmfakecloud is a clone of the cloud sync the remarkable tablet is using, in case you want to sync/backup your files and have full control of the hosting/storage environment."
+arch:
+  - amd64
+startup: once
+init: false
+homeassistant_api: true
+
+environment:
+  DATADIR: /data
+
+options: {}
+
+schema:
+  jwtSecretKey: str
+  storageUrl: str
+  rmTrustProxy:
+    - str?
+
+map: []

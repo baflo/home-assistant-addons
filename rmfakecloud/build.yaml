@@ -1,0 +1,10 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+build_from:
+  amd64: "ghcr.io/home-assistant/amd64-base:3.19"
+labels:
+  org.opencontainers.image.title: "Home Assistant Add-on: rmfakecloud"
+  org.opencontainers.image.description: "rmfakecloud is a clone of the cloud sync the remarkable tablet is using"
+  org.opencontainers.image.source: "https://github.com/baflo/home-assistant-addons/tree/main/restic"
+  org.opencontainers.image.licenses: "Apache License 2.0"
+args:
+  RESTIC_VERSION: "0.16.4"
