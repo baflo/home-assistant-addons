@@ -1,0 +1,40 @@
+name: Restic Backup
+version: 0.0.1-dev5
+slug: restic-backup
+description: "Provides a one-off backup service independent from Home Assistant backup"
+arch:
+  - amd64
+startup: once
+init: false
+homeassistant_api: true
+
+options:
+  repository:
+    location: "" 
+    password: ""
+  backup:
+    host: "HomeAssistant"
+    tag: "HomeAssistant"
+    compression: "max"
+  targets: []
+  
+schema:
+  repository:
+    location: str
+    password: password
+  backup:
+    host: str
+    tag: str
+    compression: list(off|auto|max)
+  targets:
+  - str
+
+map:
+  - backup:rw
+  - homeassistant_config:ro
+  - addon_config:ro
+  - all_addon_configs:ro
+  - ssl:ro
+  - addons:ro
+  - share:ro
+  - media:ro

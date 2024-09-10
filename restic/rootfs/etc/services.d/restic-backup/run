@@ -1,0 +1,56 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the example service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+set +e
+
+export RESTIC_REPOSITORY=$(bashio::config 'repository.location')
+export RESTIC_PASSWORD=$(bashio::config 'repository.password')
+export RESTIC_COMPRESSION=$(bashio::config 'backup.compression')
+export RESTIC_PROGRESS_FPS="0.016666"
+
+## Check whether repository is initialized
+restic cat config
+configValid=$?
+if [ $configValid -ne 0 ]
+then
+    mkdir -p "$(bashio::config 'repository.location')"
+    restic init
+fi
+
+# Run your program
+restic backup \
+    --host "$(bashio::config 'backup.host')" \
+    --tag "$(bashio::config 'backup.tag')" \
+    --exclude-caches \
+    $(bashio::config 'targets')
+
+if [ $? -eq 0 ]
+then 
+  backupState=ok
+else
+  backupState=fail
+fi
+
+stats=$(restic --json stats --mode raw-data)
+snapshots=$(restic --json snapshots)
+authHeader="Authorization: Bearer ${SUPERVISOR_TOKEN}"
+
+echo ""
+echo "Send stats to Home Assistant"
+echo "{ \"state\": \"$backupState\", \"attributes\": $stats }" \
+    | curl -vvvv \
+        --header "$authHeader" \
+        --json @- \
+        --trace-ascii - \
+        http://supervisor/core/api/states/sensor.restic_addon_stats
+
+echo ""
+echo "Send snapshots to Home Assistant"
+echo "{ \"state\": \"$backupState\", \"attributes\": { \"snapshots\": $snapshots } }" \
+    | curl -vvvv \
+        --header "$authHeader" \
+        --json @- \
+        --trace-ascii - \
+        http://supervisor/core/api/states/sensor.restic_addon_snapshots
