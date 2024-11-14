@@ -7,7 +7,7 @@ set -o nounset
 
 cp -r /teddycloud /data/teddycloud
 mkdir -p /data/teddycloud/certs/server /data/teddycloud/certs/client
-RUN ln -sf /data/teddycloud /etc/teddycloud
+ln -sf /data/teddycloud /etc/teddycloud
 
 if [ -n "${DOCKER_TEST:-}" ]; then
   cd /data/teddycloud
