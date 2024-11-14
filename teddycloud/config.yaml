@@ -7,7 +7,7 @@ description: "Teddycloud"
 arch:
   - amd64
 
-startup: service
+startup: services
 init: false
 
 ingress: true
