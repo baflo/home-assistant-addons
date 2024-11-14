@@ -1,0 +1,19 @@
+name: Teddycloud
+panel_title: Teddycloud
+panel_icon: mdi:teddy-bear
+version: 0.0.1-dev0
+slug: teddycloud
+description: "Teddycloud"
+arch:
+  - amd64
+
+startup: service
+init: false
+
+ingress: true
+ingress_port: 80
+watchdog: http://[HOST]:[PORT:80]
+
+options: {}
+
+schema: {}
