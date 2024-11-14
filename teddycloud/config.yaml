@@ -1,7 +1,7 @@
 name: Teddycloud
 panel_title: Teddycloud
 panel_icon: mdi:teddy-bear
-version: 0.0.1-dev0
+version: 0.0.1-dev2
 slug: teddycloud
 description: "Teddycloud"
 arch:
