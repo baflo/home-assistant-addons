@@ -5,10 +5,22 @@
 # ==============================================================================
 set +e
 
-export RESTIC_REPOSITORY=$(bashio::config 'repository.location')
-export RESTIC_PASSWORD=$(bashio::config 'repository.password')
-export RESTIC_COMPRESSION=$(bashio::config 'backup.compression')
+
+bashio::config 'backups' | jq -cr '.[]' | while read backup
+do
+
+export RESTIC_REPOSITORY=$(echo $backup | jq 'repository.location')
+export RESTIC_PASSWORD=$(echo $backup | jq 'repository.password')
+export RESTIC_COMPRESSION=$(echo $backup | jq 'backup.compression')
+export RESTIC_BACKUP_HOST=$(echo $backup | jq 'backup.host')
+export RESTIC_BACKUP_TAG=$(echo $backup | jq 'backup.tag')
+export RESTIC_TARGETS=$(echo $backup | jq -cr 'targets' | tr '\n' ' ')
 export RESTIC_PROGRESS_FPS="0.016666"
+
+echo "Repository: $RESTIC_REPOSITORY"
+echo "Host: $RESTIC_BACKUP_HOST"
+echo "Tag: $RESTIC_BACKUP_TAG"
+echo "Targets: $RESTIC_TARGETS"
 
 ## Check whether repository is initialized
 restic cat config
@@ -21,10 +33,10 @@ fi
 
 # Run your program
 restic backup \
-    --host "$(bashio::config 'backup.host')" \
-    --tag "$(bashio::config 'backup.tag')" \
+    --host "$RESTIC_BACKUP_HOST" \
+    --tag "$RESTIC_BACKUP_TAG" \
     --exclude-caches \
-    $(bashio::config 'targets')
+    $RESTIC_TARGETS
 
 if [ $? -eq 0 ]
 then 
@@ -54,3 +66,5 @@ echo "{ \"state\": \"$backupState\", \"attributes\": { \"snapshots\": $snapshots
         --json @- \
         --trace-ascii - \
         http://supervisor/core/api/states/sensor.restic_addon_snapshots
+
+done
