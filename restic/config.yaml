@@ -9,25 +9,27 @@ init: false
 homeassistant_api: true
 
 options:
-  repository:
-    location: "" 
-    password: ""
-  backup:
-    host: "HomeAssistant"
-    tag: "HomeAssistant"
-    compression: "max"
-  targets: []
+  backups:
+  - repository:
+      location: "" 
+      password: ""
+    backup:
+      host: "HomeAssistant"
+      tag: "HomeAssistant"
+      compression: "max"
+    targets: []
   
 schema:
-  repository:
-    location: str
-    password: password
-  backup:
-    host: str
-    tag: str
-    compression: list(off|auto|max)
-  targets:
-  - str
+  backups:
+  - repository:
+      location: str
+      password: password
+    backup:
+      host: str
+      tag: str
+      compression: list(off|auto|max)
+    targets:
+    - str
 
 map:
   - backup:rw
