@@ -9,11 +9,11 @@ set +e
 bashio::config 'backups' | jq -cr '.[]' | while read backup
 do
 
-export RESTIC_REPOSITORY=$(echo $backup | jq 'repository.location')
-export RESTIC_PASSWORD=$(echo $backup | jq 'repository.password')
-export RESTIC_COMPRESSION=$(echo $backup | jq 'backup.compression')
-export RESTIC_BACKUP_HOST=$(echo $backup | jq 'backup.host')
-export RESTIC_BACKUP_TAG=$(echo $backup | jq 'backup.tag')
+export RESTIC_REPOSITORY=$(echo $backup | jq 'repository')
+export RESTIC_PASSWORD=$(echo $backup | jq 'password')
+export RESTIC_COMPRESSION=$(echo $backup | jq 'compression')
+export RESTIC_BACKUP_HOST=$(echo $backup | jq 'host')
+export RESTIC_BACKUP_TAG=$(echo $backup | jq 'tag')
 export RESTIC_TARGETS=$(echo $backup | jq -cr 'targets' | tr '\n' ' ')
 export RESTIC_PROGRESS_FPS="0.016666"
 
