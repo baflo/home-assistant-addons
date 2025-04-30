@@ -71,11 +71,11 @@ export PAPERLESS_OCR_LANGUAGES="$(config '.ocr_langs[]' | strip-last-char | tr '
 # Docker specific
 export PAPERLESS_WEBSERVER_WORKERS="$(config '.web_workers')"
 
-
+env > /env.sh
 env | while read envVar
 do
   NAME=$(echo $envVar | awk '-F=' '{ print $1 }')
   VALUE=$(echo $envVar | awk '-F=' '{ print $2 }')
 
-  echo $VALUE > /var/run/s6/container_environment/$NAME
+  echo -n $VALUE > /var/run/s6/container_environment/$NAME
 done
