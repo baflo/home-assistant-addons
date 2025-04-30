@@ -9,7 +9,7 @@ function strip-last-char {
 }
 
 function container_env {
-  echo $2 > "/var/run/s6/container_environment/$1"
+  echo $2 > "/var/run/s6/container_environment/${1}_FILE"
 }
 
 container_env HOSTS "http://localhost,http://homeassistant.local,$(config '.hosts[].host' | strip-last-char | tr '\n' ','),$(ip addr show | grep -oP "inet \K[0-9.]+" | sed 's/^/http:\/\//' | tr '\n' ',' | sed 's/,$//')"
