@@ -1,5 +1,9 @@
 #!/command/with-contenv bash
 
+declare -r log_prefix="[env-setup]"
+
+echo "${log_prefix} extra env setup"
+
 function config {
   yq "$@" /data/options.json
 }
