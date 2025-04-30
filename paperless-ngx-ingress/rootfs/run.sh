@@ -73,4 +73,4 @@ nginx -s reload
 env > /env.sh
 s6-rc start extra
 
-"/sbin/docker-entrypoint.sh" $@
+"/init" $@
