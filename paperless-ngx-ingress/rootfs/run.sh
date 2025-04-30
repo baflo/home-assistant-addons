@@ -70,7 +70,7 @@ export PAPERLESS_WEBSERVER_WORKERS=$(config '.web_workers')
 # Reload nginx configuration
 nginx -s reload
 
-env > /env.sh \ 
-  && s6-rc start extra
+env > /env.sh
+s6-rc start extra
 
 "/sbin/docker-entrypoint.sh" $@
