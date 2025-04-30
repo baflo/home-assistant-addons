@@ -71,6 +71,6 @@ export PAPERLESS_WEBSERVER_WORKERS=$(config '.web_workers')
 nginx -s reload
 
 env > /env.sh
-s6-rc start extra
+# s6-svc -u /run/s6/services/<your-service>
 
 "/init" $@
