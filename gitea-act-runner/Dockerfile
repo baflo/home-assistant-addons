@@ -1,5 +1,7 @@
+
+
 ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM ${BUILD_FROM} AS builder
 
 ARG BASHIO_VERSION="v0.17.0"
 ARG TEMPIO_VERSION="2024.11.2"
@@ -14,13 +16,20 @@ RUN curl -J -L -o /tmp/bashio.tar.gz \
     \
     && mv /tmp/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    \
-    && curl -L -s -o /usr/bin/tempio \
+    
+RUN curl -L -s -o /usr/bin/tempio \
         "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" \
     && chmod a+x /usr/bin/tempio
     
 # Optional: Create a non-root user if needed
 # RUN adduser -D -H -u 1000 hassio
+
+FROM ${BUILD_FROM} AS target
+
+COPY /usr/lib/bashio /usr/lib/bashio
+COPY /usr/bin/bashio /usr/bin/bashio
+
+COPY /usr/bin/tempio /usr/bin/tempio
 
 # Copy run script
 COPY rootfs /
