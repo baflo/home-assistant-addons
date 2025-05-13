@@ -29,10 +29,10 @@ RUN curl -L -s -o /usr/bin/tempio \
 
 FROM ${BUILD_FROM} AS target
 
-COPY --from builder /usr/lib/bashio /usr/lib/bashio
-COPY --from builder /usr/bin/bashio /usr/bin/bashio
+COPY --from=builder /usr/lib/bashio /usr/lib/bashio
+COPY --from=builder /usr/bin/bashio /usr/bin/bashio
 
-COPY --from builder /usr/bin/tempio /usr/bin/tempio
+COPY --from=builder /usr/bin/tempio /usr/bin/tempio
 
 # Copy run script
 COPY rootfs /
