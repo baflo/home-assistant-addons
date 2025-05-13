@@ -1,5 +1,5 @@
 name: "Gitea Act Runner"
-version: "0.1.0-dev4"
+version: "0.1.0-dev5"
 slug: "gitea_act_runner"
 description: "Runs GitHub Actions with Act as a Home Assistant add-on using Gitea Act Runner"
 url: "https://github.com/dein-repo/homeassistant-gitea-act-runner"
