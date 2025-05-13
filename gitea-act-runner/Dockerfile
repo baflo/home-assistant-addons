@@ -6,6 +6,9 @@ FROM ${BUILD_FROM} AS builder
 ARG BASHIO_VERSION="v0.17.0"
 ARG TEMPIO_VERSION="2024.11.2"
 
+# Install Linux tools
+RUN apk add --no-cache curl
+
 # Install Home Assistant Add-on Base tools
 RUN curl -J -L -o /tmp/bashio.tar.gz \
         "https://github.com/hassio-addons/bashio/archive/${BASHIO_VERSION}.tar.gz" \
