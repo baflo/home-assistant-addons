@@ -2,6 +2,7 @@ ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
 ARG BASHIO_VERSION="v0.17.0"
+ARG TEMPIO_VERSION="2024.11.2"
 
 # Install Home Assistant Add-on Base tools
 RUN curl -J -L -o /tmp/bashio.tar.gz \
