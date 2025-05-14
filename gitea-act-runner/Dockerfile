@@ -4,6 +4,7 @@ FROM ${BUILD_FROM} AS builder
 ARG BASHIO_VERSION="v0.17.0"
 ARG TEMPIO_VERSION="2024.11.2"
 
+USER root
 COPY rootfs /
 RUN update-ca-certificates
 
@@ -30,6 +31,8 @@ RUN curl -L -s -o /usr/bin/tempio \
 
 FROM ${BUILD_FROM} AS target
 
+USER root
+
 COPY rootfs /
 RUN update-ca-certificates
 
@@ -43,8 +46,8 @@ RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
 
 COPY --from=builder /usr/bin/tempio /usr/bin/tempio
 
-# Copy run script
+# Copy service adaptions
 COPY rootfs /
-RUN chmod +x /run.sh
 
-ENTRYPOINT ["/sbin/tini", "--", "/run.sh"]
+USER rootless
+

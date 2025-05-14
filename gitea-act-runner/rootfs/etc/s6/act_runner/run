@@ -1,4 +1,6 @@
-#!/bin/bash bashio
+#!/usr/bin/env bashio
+
+s6-svwait -U /etc/s6/docker
 
 bashio::log.info "Starting..."
 
@@ -7,8 +9,6 @@ export GITEA_INSTANCE_URL=$(bashio::config 'instance_url')
 export GITEA_RUNNER_REGISTRATION_TOKEN=$(bashio::config 'registration_token')
 export GITEA_RUNNER_LABELS=$(bashio::config 'labels')
 
+bashio::log.info "Finished configuration."
 
-
-bashio::log.info "Finished configuration. Going to start act runner..."
-
-/opt/act/run.sh "$@"
+exec run.sh
