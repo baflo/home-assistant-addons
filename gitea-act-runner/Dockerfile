@@ -9,7 +9,7 @@ ARG GITEA_ACT_RUNNER_VERSION
 # Install Gitea Act Runner
 RUN mkdir -p /usr/bin \
     && cd /usr/bin \
-    && wget -o gitea_act_runner https://gitea.com/gitea/act_runner/releases/download/v${GITEA_ACT_RUNNER_VERSION}/act_runner-${GITEA_ACT_RUNNER_VERSION}-linux-${BUILD_ARCH} \
+    && wget -O gitea_act_runner https://gitea.com/gitea/act_runner/releases/download/v${GITEA_ACT_RUNNER_VERSION}/act_runner-${GITEA_ACT_RUNNER_VERSION}-linux-${BUILD_ARCH} \
     && chmod +x gitea_act_runner
 
 COPY rootfs /
