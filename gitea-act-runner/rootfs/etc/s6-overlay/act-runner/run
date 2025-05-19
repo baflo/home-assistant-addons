@@ -11,4 +11,5 @@ export GITEA_RUNNER_LABELS=$(bashio::config 'labels')
 
 bashio::log.info "Finished configuration."
 
+/usr/bin/gitea_act_runner register
 /usr/bin/gitea_act_runner "$@"
