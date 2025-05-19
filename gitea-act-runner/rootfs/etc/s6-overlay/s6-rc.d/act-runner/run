@@ -2,22 +2,16 @@
 
 bashio::log.info "Starting..."
 
-export GITEA_RUNNER_NAME=$(bashio::config 'runner_name')
-export GITEA_INSTANCE_URL=$(bashio::config 'instance_url')
-export GITEA_RUNNER_REGISTRATION_TOKEN=$(bashio::config 'registration_token')
-export GITEA_RUNNER_LABELS=$(bashio::config 'labels')
+GITEA_RUNNER_NAME=$(bashio::config 'runner_name')
+GITEA_INSTANCE_URL=$(bashio::config 'instance_url')
+GITEA_RUNNER_REGISTRATION_TOKEN=$(bashio::config 'registration_token')
+GITEA_RUNNER_LABELS=$(bashio::config 'labels')
 
 bashio::log.info "Finished configuration."
-bashio::log.info "\
-    --instance ${GITEA_INSTANCE_URL} \
-    --name ${GITEA_RUNNER_NAME} \
-    --token ${GITEA_RUNNER_REGISTRATION_TOKEN} \
-    --labels ${GITEA_RUNNER_LABELS} "
 
-
-/usr/bin/gitea_act_runner register \
-    --instance "${GITEA_INSTANCE_URL}" \
+/usr/bin/gitea_act_runner register --no-interactive \
     --name "${GITEA_RUNNER_NAME}" \
+    --instance "${GITEA_INSTANCE_URL}" \
     --token "${GITEA_RUNNER_REGISTRATION_TOKEN}" \
     --labels "${GITEA_RUNNER_LABELS}" 
 /usr/bin/gitea_act_runner daemon
