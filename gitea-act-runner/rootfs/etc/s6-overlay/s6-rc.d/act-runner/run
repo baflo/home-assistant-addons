@@ -14,4 +14,4 @@ bashio::log.info "Finished configuration."
     --name "${GITEA_RUNNER_NAME}" \
     --token "${GITEA_RUNNER_REGISTRATION_TOKEN}" \
     --labels "${GITEA_RUNNER_LABELS}" 
-/usr/bin/gitea_act_runner "$@"
+/usr/bin/gitea_act_runner daemon
