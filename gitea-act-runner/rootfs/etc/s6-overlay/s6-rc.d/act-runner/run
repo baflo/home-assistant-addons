@@ -1,7 +1,5 @@
 #!/command/with-contenv bashio
 
-s6-svwait -U /etc/s6/docker
-
 bashio::log.info "Starting..."
 
 export GITEA_RUNNER_NAME=$(bashio::config 'runner_name')
