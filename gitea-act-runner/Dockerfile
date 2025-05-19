@@ -1,53 +1,19 @@
-ARG BUILD_FROM
-FROM ${BUILD_FROM} AS builder
+ARG BUILD_ARCH amd64
 
-ARG BASHIO_VERSION="v0.17.0"
-ARG TEMPIO_VERSION="2024.11.2"
-
-USER root
-COPY rootfs /
-RUN update-ca-certificates
-
-# Install Linux tools
-RUN apk add --no-cache \
-        curl
-
-# Install Home Assistant Add-on Base tools
-RUN curl -J -L -o /tmp/bashio.tar.gz \
-        "https://github.com/hassio-addons/bashio/archive/${BASHIO_VERSION}.tar.gz" \
-    && mkdir /tmp/bashio \
-    && tar zxvf \
-        /tmp/bashio.tar.gz \
-        --strip 1 -C /tmp/bashio \
-    \
-    && mv /tmp/bashio/lib /usr/lib/bashio
-    
-RUN curl -L -s -o /usr/bin/tempio \
-        "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" \
-    && chmod a+x /usr/bin/tempio
-    
-# Optional: Create a non-root user if needed
-# RUN adduser -D -H -u 1000 hassio
-
-FROM ${BUILD_FROM} AS target
-
-USER root
+FROM ghcr.io/home-assistant/${BUILD_ARCH}-base AS builder
 
 COPY rootfs /
 RUN update-ca-certificates
 
-# Install Linux tools
-RUN apk add --no-cache \
-        curl \
-        jq
+# Nothing to do here, just a placeholder
 
-COPY --from=builder /usr/lib/bashio /usr/lib/bashio
-RUN ln -s /usr/lib/bashio/bashio /usr/bin/bashio
+FROM ghcr.io/home-assistant/${BUILD_ARCH}-base AS target
 
-COPY --from=builder /usr/bin/tempio /usr/bin/tempio
+# Install Gitea Act Runner
+RUN mkdir -p /usr/bin \
+    && cd /usr/bin \
+    && curl -Lo gitea_act_runner https://gitea.com/gitea/act_runner/releases/download/v${GITEA_ACT_RUNNER_VERSION}/act_runner-${GITEA_ACT_RUNNER_VERSION}-linux-${BUILD_ARCH} \
+    && chmod +x gitea_act_runner
 
-# Copy service adaptions
 COPY rootfs /
-
-USER rootless
-
+RUN update-ca-certificates

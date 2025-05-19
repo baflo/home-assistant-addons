@@ -1,4 +1,4 @@
-#!/usr/bin/env bashio
+#!/command/with-contenv bashio
 
 s6-svwait -U /etc/s6/docker
 
@@ -11,4 +11,4 @@ export GITEA_RUNNER_LABELS=$(bashio::config 'labels')
 
 bashio::log.info "Finished configuration."
 
-exec run.sh
+/usr/bin/gitea_act_runner "$@"

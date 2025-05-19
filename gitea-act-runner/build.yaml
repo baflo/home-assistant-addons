@@ -1,7 +1,5 @@
-build_from:
-  amd64: docker.io/gitea/act_runner:latest-dind-rootless
-  aarch64: docker.io/gitea/act_runner:latest-dind-rootless
-  armv7: docker.io/gitea/act_runner:latest-dind-rootless
+args:
+  GITEA_ACT_RUNNER_VERSION: 0.2.11
 
 labels:
   org.opencontainers.image.title: "Home Assistant Add-on: Gitea Act Runner"
