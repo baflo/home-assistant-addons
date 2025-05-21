@@ -7,6 +7,5 @@ cd /usr/src/paperless_extra
 
 pip install -r requirements.txt
 
-env
 python manage.py runserver 0.0.0.0:8001 
 

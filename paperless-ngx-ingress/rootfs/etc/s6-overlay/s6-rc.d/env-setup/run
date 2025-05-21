@@ -80,5 +80,5 @@ printenv | while IFS='=' read -r name value; do
   safe_name=$(echo "$name" | tr -c 'A-Za-z0-9._-' '_')
 
   # Write value to file
-  echo "$value" > "$output_dir/$safe_name"
+  echo "$value" > "/var/run/s6/container_environment/$safe_name"
 done
