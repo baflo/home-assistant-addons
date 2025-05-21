@@ -25,6 +25,12 @@ configuration:
     name: OCR languages to be used
     description: >
       List of all languages that should be used for OCR. See [docs](https://docs.paperless-ngx.com/configuration/#PAPERLESS_OCR_LANGUAGE) for more information.
+  ocr_user_args:
+    name: Additional OCRmyPDF arguments
+    description: >
+      Use this parameter to specify any additional arguments you wish to pass to OCRmyPDF. 
+      Specify arguments as a JSON dictionary. Keep note of lower case booleans and double quoted parameter names and strings. Examples:
+        {"deskew": true, "optimize": 3, "unpaper_args": "--pre-rotate 90"}
   tika_enabled:
     name: Enable Apache Tika
     description: >

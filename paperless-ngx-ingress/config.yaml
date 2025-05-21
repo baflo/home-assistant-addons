@@ -2,7 +2,7 @@ name: paperless-ngx-ingress
 panel_title: Paperless
 panel_icon: mdi:file-document-multiple-outline
 description: Embeds paperless-ngx with ingress in Home Assistant.
-version: "0.3.6"
+version: "0.4.0-dev"
 slug: paperless-ngx-ingress
 
 arch:
@@ -35,6 +35,7 @@ schema:
     - host: url
   ocr_langs:
     - str
+  ocr_user_args: str
   tika_enabled: bool
   tika_endpoint: str?
   tika_gotenberg_endpoint: str?

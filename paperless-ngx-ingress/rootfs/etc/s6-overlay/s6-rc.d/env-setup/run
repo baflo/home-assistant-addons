@@ -67,6 +67,7 @@ export PAPERLESS_IGNORE_DATES="$(config '.ignore_dates[]' | strip-last-char | tr
 # OCR config
 export PAPERLESS_OCR_LANGUAGE="$(config '.ocr_langs[]' | strip-last-char | tr '\n' '+')"
 export PAPERLESS_OCR_LANGUAGES="$(config '.ocr_langs[]' | strip-last-char | tr '\n' ' ')"
+export PAPERLESS_OCR_USER_ARGS="$(config '.ocr_user_args' | strip-last-char | tr '\n' ' ')"
 
 # Docker specific
 export PAPERLESS_WEBSERVER_WORKERS="$(config '.web_workers')"
