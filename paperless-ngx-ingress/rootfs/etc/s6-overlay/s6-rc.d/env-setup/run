@@ -72,11 +72,13 @@ export PAPERLESS_OCR_USER_ARGS="$(config '.ocr_user_args' | strip-last-char | tr
 # Docker specific
 export PAPERLESS_WEBSERVER_WORKERS="$(config '.web_workers')"
 
-env > /env.sh
-env | while read envVar
-do
-  NAME=$(echo $envVar | awk '-F=' '{ print $1 }')
-  VALUE=$(echo $envVar | awk '-F=' '{ print $2 }')
+printenv | while IFS='=' read -r name value; do
+  # Skip empty var names
+  [ -z "$name" ] && continue
 
-  echo -n "$VALUE" > "/var/run/s6/container_environment/$NAME"
+  # Allow only valid file names
+  safe_name=$(echo "$name" | tr -c 'A-Za-z0-9._-' '_')
+
+  # Write value to file
+  echo "$value" > "$output_dir/$safe_name"
 done
