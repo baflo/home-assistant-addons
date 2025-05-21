@@ -78,5 +78,5 @@ do
   NAME=$(echo $envVar | awk '-F=' '{ print $1 }')
   VALUE=$(echo $envVar | awk '-F=' '{ print $2 }')
 
-  echo -n $VALUE > /var/run/s6/container_environment/$NAME
+  echo -n "$VALUE" > "/var/run/s6/container_environment/$NAME"
 done
