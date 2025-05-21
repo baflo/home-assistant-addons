@@ -77,7 +77,7 @@ printenv | while IFS='=' read -r name value; do
   [ -z "$name" ] && continue
 
   # Allow only valid file names
-  safe_name=$(echo "$name" | tr -c 'A-Za-z0-9._-' '_')
+  safe_name=$(echo -n "$name" | tr -c 'A-Za-z0-9._-' '_')
 
   # Write value to file
   echo "$value" > "/var/run/s6/container_environment/$safe_name"
