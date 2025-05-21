@@ -54,6 +54,7 @@ options:
     - host: http://homeassistant.local:8123
   ocr_langs:
     - deu
+  ocr_user_args: ""
   tika_enabled: false
   web_workers: 1
 
