@@ -5,7 +5,8 @@ FROM ghcr.io/home-assistant/amd64-base AS target
 
 RUN apk add openssl \
             curl \
-            ca-certificates
+            ca-certificates \
+            envsubst
 
 RUN printf  "%s%s%s%s\n" \
             "@nginx " \
