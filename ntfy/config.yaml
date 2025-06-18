@@ -5,7 +5,6 @@ description: "Send push notifications to your phone or desktop via scripts from 
 url: "https://github.com/binwiederhier/ntfy"
 arch:
   - amd64
-  - armv6
   - armv7
 
 init: false
