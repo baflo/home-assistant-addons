@@ -4,14 +4,14 @@ bashio::log.info "Starting..."
 
 mkdir -p /data/lib/ntfy
 
-NTFY_AUTH_FILE=/data/lib/ntfy/auth.db
-NTFY_CACHE_FILE=/data/lib/ntfy/cache.db
-NTFY_ATTACHMENT_CACHE_DIR=/data/lib/ntfy/attachments
+export NTFY_AUTH_FILE=/data/lib/ntfy/auth.db
+export NTFY_CACHE_FILE=/data/lib/ntfy/cache.db
+export NTFY_ATTACHMENT_CACHE_DIR=/data/lib/ntfy/attachments
 
-NTFY_BASE_URL=$(bashio::config 'base_url')
-NTFY_AUTH_DEFAULT_ACCESS=$(bashio::config 'default_access')
-NTFY_ENABLE_LOGIN=$(bashio::config 'enable_login')
-NTFY_BEHIND_PROXY=$(bashio::config 'behind_proxy')
+export NTFY_BASE_URL=$(bashio::config 'base_url')
+export NTFY_AUTH_DEFAULT_ACCESS=$(bashio::config 'default_access')
+export NTFY_ENABLE_LOGIN=$(bashio::config 'enable_login')
+export NTFY_BEHIND_PROXY=$(bashio::config 'behind_proxy')
 
 bashio::log.info "Finished configuration."
 
