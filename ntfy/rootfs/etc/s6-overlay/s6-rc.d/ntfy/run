@@ -12,7 +12,7 @@ export NTFY_BASE_URL="$(bashio::config 'base_url')"
 export NTFY_AUTH_DEFAULT_ACCESS="$(bashio::config 'default_access')"
 export NTFY_ENABLE_LOGIN="$(bashio::config 'enable_login')"
 export NTFY_BEHIND_PROXY="$(bashio::config 'behind_proxy')"
-export NTFY_LISTEN_HTTP=":88"
+export NTFY_LOG_LEVEL=debug
 
 bashio::log.info "Finished configuration."
 
