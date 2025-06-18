@@ -1,4 +1,5 @@
 ARG BUILD_ARCH=amd64
+ARG NTFY_VERSION=2.12.0
 
 FROM ghcr.io/home-assistant/${BUILD_ARCH}-base AS target
 
