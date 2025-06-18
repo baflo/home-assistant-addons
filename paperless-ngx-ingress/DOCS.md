@@ -23,16 +23,6 @@ This addon is accessible from ingress and may also be configured to be accessed 
 - Port `8000` can be used for external access, e.g. you can configure [cloudflared](https://github.com/brenner-tobias/addon-cloudflared/) to point to it. Don't forget to add your external host to the config. This entry removes the `REMOTE_USER` header so it cannot be used externally.
 - Internally, paperless runs on port 8888, but it's bound to address 127.0.0.1, so you cannot access it from outside of the container.
 
-
-### Metrics API
-
-Additionally, a second API is provided to easily access metrics from Home Assistant. This API is accessible on port 8001 and provides folling APIs:
-
-- `inbox/`, `inbox/<str:username>`
-  - the number of _inbox_ documents from the user in question. If none is given, the username will be extracted from the request header [`X-Remote-User-Name`](https://developers.home-assistant.io/docs/add-ons/security#authenticating-a-user-when-using-ingress).
-- `todo/`, `todo/<str:username>`
-  - the number of _todo_ documents from the user in question. If none is given, the username will be extracted from the request header [`X-Remote-User-Name`](https://developers.home-assistant.io/docs/add-ons/security#authenticating-a-user-when-using-ingress).
-
 #### Example Rest sensor configuration 
 
 ```
