@@ -1,0 +1,34 @@
+name: "ntfy"
+version: "0.1.0-dev1"
+slug: "nfy"
+description: "Send push notifications to your phone or desktop via scripts from any computer"
+url: "https://github.com/binwiederhier/ntfy"
+arch:
+  - amd64
+  - armv6
+  - armv7
+  - arm64
+
+init: false
+startup: services
+boot: auto
+
+ingress: true
+ingress_port: 80
+watchdog: http://[HOST]:[PORT:80]
+
+map:
+  - config:rw
+  - data:rw
+
+schema:
+  base_url: str
+  default_access: list(deny-all|write-only|read-only|read-write)
+  enable_login: bool
+  behind_proxy: bool
+
+options:
+  default_access: deny-all
+  enable_login: true
+  behind_proxy: true
+
