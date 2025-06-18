@@ -7,7 +7,7 @@ cp /etc/nginx/conf.d/ingress/templates/headers.remote-user-from-ingress.conf \
                                     /etc/nginx/conf.d/ingress/headers.remote-user.conf;
 
 export SERVICE_BIND_ADDR="127.0.0.1"
-export SERVICE_PORT="80"
+export SERVICE_PORT="8080"
 for target in default ingress; do
   envsubst '$SERVICE_BIND_ADDR $SERVICE_PORT' < "/etc/nginx/conf.d/$target/templates/location.conf" \
                                                 > "/etc/nginx/conf.d/$target/location.conf" || exit 1;

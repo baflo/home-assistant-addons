@@ -10,9 +10,10 @@ export NTFY_ATTACHMENT_CACHE_DIR=/data/lib/ntfy/attachments
 
 export NTFY_BASE_URL="$(bashio::config 'base_url')"
 export NTFY_AUTH_DEFAULT_ACCESS="$(bashio::config 'default_access')"
-export NTFY_ENABLE_LOGIN="$(bashio::config 'enable_login')"
+export NTFY_ENABLE_LOGIN=true
 export NTFY_BEHIND_PROXY="$(bashio::config 'behind_proxy')"
 export NTFY_LOG_LEVEL=debug
+export NTFY_LISTEN_HTTP=8080
 
 bashio::log.info "Finished configuration."
 
