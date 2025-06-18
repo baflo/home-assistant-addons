@@ -7,7 +7,6 @@ arch:
   - amd64
   - armv6
   - armv7
-  - arm64
 
 init: false
 startup: services
