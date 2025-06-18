@@ -15,4 +15,6 @@ NTFY_BEHIND_PROXY=$(bashio::config 'behind_proxy')
 
 bashio::log.info "Finished configuration."
 
+env
+
 ntfy serve
