@@ -19,6 +19,7 @@ for auth in "$(bashio::config 'users')"
 do
   name=$(echo $auth | jq .name | xargs)
   password=$(echo $auth | jq .password | xargs)
+  topics_rw=$(echo $auth | jq .topics_rw | xargs)
 
   if (exit $(ntfy access "$name"))
   then
@@ -26,6 +27,11 @@ do
   else
     NTFY_PASSWORD="$password" ntfy user add "$name"
   fi
+
+  for topic in "$(echo $topics_rw | jq -r '.[]')"
+  do
+    ntfy access "$fb" "$topics_rw" rw
+  done
 done
 
 bashio::log.info "Finished configuration."
