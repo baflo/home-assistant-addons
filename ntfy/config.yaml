@@ -1,5 +1,5 @@
 name: "ntfy"
-version: "0.1.0-dev27"
+version: "0.1.0-dev28"
 slug: "ntfy"
 description: "Send push notifications to your phone or desktop via scripts from any computer"
 url: "https://github.com/binwiederhier/ntfy"
@@ -13,10 +13,9 @@ boot: auto
 
 # ingress: true
 # ingress_port: 666
-watchdog: http://[HOST]:[PORT:8080]
+# watchdog: http://[HOST]:[PORT:8080]
 
 map:
-  - config:rw
   - data:rw
 
 schema:
