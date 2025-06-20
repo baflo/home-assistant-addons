@@ -1,5 +1,5 @@
 name: "ntfy"
-version: "0.1.0-dev25"
+version: "0.1.0-dev26"
 slug: "ntfy"
 description: "Send push notifications to your phone or desktop via scripts from any computer"
 url: "https://github.com/binwiederhier/ntfy"
@@ -27,7 +27,7 @@ schema:
   users:
    - name: str
      password: str
-     access:
+     topics_rw:
        - str
 
 options:
