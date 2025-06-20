@@ -17,9 +17,9 @@ export NTFY_LISTEN_HTTP=":8080"
 
 for auth in "$(bashio::config 'users')"
 do
-  name=$(echo $auth | jq .name | xargs)
-  password=$(echo $auth | jq .password | xargs)
-  topics_rw=$(echo $auth | jq .topics_rw | xargs)
+  name=$(echo "$auth" | jq .name | xargs)
+  password=$(echo "$auth" | jq .password | xargs)
+  topics_rw=$(echo "$auth" | jq .topics_rw)
 
   if (exit $(ntfy access "$name"))
   then
@@ -30,7 +30,7 @@ do
 
   for topic in "$(echo "$topics_rw" | jq -r '.[]')"
   do
-    ntfy access "$name" "$topics_rw" rw
+    ntfy access "$name" "$topic" rw
   done
 done
 
