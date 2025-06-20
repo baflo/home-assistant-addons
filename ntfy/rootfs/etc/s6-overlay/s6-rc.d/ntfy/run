@@ -15,6 +15,19 @@ export NTFY_BEHIND_PROXY="$(bashio::config 'behind_proxy')"
 export NTFY_LOG_LEVEL=debug
 export NTFY_LISTEN_HTTP=":8080"
 
+for auth in "$(bashio::config 'users')"
+do
+  name=$(echo $auth | jq .name | xargs)
+  password=$(echo $auth | jq .password | xargs)
+
+  if (exit $(ntfy access "$name"))
+  then
+    NTFY_PASSWORD="$password" ntfy user change-pass "$name"
+  else
+    NTFY_PASSWORD="$password" ntfy user add "$name"
+  fi
+done
+
 bashio::log.info "Finished configuration."
 
 env
