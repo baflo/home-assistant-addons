@@ -1,5 +1,5 @@
 name: "ntfy"
-version: "0.1.0-dev22"
+version: "0.1.0-dev23"
 slug: "ntfy"
 description: "Send push notifications to your phone or desktop via scripts from any computer"
 url: "https://github.com/binwiederhier/ntfy"
@@ -24,9 +24,12 @@ schema:
   default_access: list(deny-all|write-only|read-only|read-write)
   enable_login: bool
   behind_proxy: bool
+  users:
+   - name: str
+     password: str
 
 options:
   default_access: deny-all
   enable_login: true
   behind_proxy: true
-
+  users: []
