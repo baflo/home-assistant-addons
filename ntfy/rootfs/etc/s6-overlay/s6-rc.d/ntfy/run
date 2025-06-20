@@ -28,9 +28,9 @@ do
     NTFY_PASSWORD="$password" ntfy user add "$name"
   fi
 
-  for topic in "$(echo $topics_rw | jq -r '.[]')"
+  for topic in "$(echo "$topics_rw" | jq -r '.[]')"
   do
-    ntfy access "$fb" "$topics_rw" rw
+    ntfy access "$name" "$topics_rw" rw
   done
 done
 
