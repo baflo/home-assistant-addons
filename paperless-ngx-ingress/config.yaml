@@ -2,7 +2,7 @@ name: paperless-ngx-ingress
 panel_title: Paperless
 panel_icon: mdi:leaf
 description: Embeds paperless-ngx with ingress in Home Assistant.
-version: "0.5.0"
+version: "0.5.1"
 slug: paperless-ngx-ingress
 
 arch:
