@@ -2,6 +2,10 @@ configuration:
   admin:
     name: Credentials for default superuser
     description: These credentials will be used if at start there's no superuser configured.
+  secret_key: 
+    name: Secret Signing Key
+    description: >
+      A critical security setting used for cryptographic signing and should be set to a long, random value.
   consumption:
     name: Configurations for consumption
     description: >
