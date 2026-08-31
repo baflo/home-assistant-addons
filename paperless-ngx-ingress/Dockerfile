@@ -1,4 +1,4 @@
-FROM ghcr.io/paperless-ngx/paperless-ngx:latest
+FROM ghcr.io/paperless-ngx/paperless-ngx:2.20.15
 
 ARG YQ_BINARY=yq_linux_amd64
 ARG YQ_VERSION=4.30.8
