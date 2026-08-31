@@ -16,7 +16,7 @@ export HOSTS="http://localhost,http://homeassistant.local,$(config '.hosts[].hos
 
 export PAPERLESS_ADMIN_USER="$(config '.admin.username')"
 export PAPERLESS_ADMIN_PASSWORD="$(config '.admin.password')"
-export PAPERLESS_SECRET_KEY ="$(config '.secret_key')"
+export PAPERLESS_SECRET_KEY="$(config '.secret_key')"
 export PAPERLESS_FORCE_SCRIPT_NAME="$(curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" "http://supervisor/addons/${HOSTNAME/-/_}/info" | yq .data.ingress_entry)"
 export PAPERLESS_CSRF_TRUSTED_ORIGINS="$(config '.hosts[].host' | strip-last-char | tr '\n' ',')"
 
